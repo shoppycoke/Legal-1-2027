@@ -6,10 +6,10 @@ const MATIERES = {
     nom: 'Introduction au Droit',
     emoji: '⚖️',
     couleur: '#c9a84c',
-    prog: 42,
+    prog: 0,
     chapitres: [
-      { t: "Qu'est-ce que le droit ?", done: true,  xp: 120 },
-      { t: 'Les sources du droit',      done: true,  xp: 150 },
+      { t: "Qu'est-ce que le droit ?", done: false, xp: 120 },
+      { t: 'Les sources du droit',      done: false, xp: 150 },
       { t: 'La hiérarchie des normes',  done: false, xp: 180 },
       { t: 'Les personnes juridiques',  done: false, xp: 150 },
       { t: 'Les droits subjectifs',     done: false, xp: 200 }
@@ -26,9 +26,9 @@ const MATIERES = {
     nom: 'Droit Civil',
     emoji: '📜',
     couleur: '#10b981',
-    prog: 18,
+    prog: 0,
     chapitres: [
-      { t: 'Formation du contrat',          done: true,  xp: 200 },
+      { t: 'Formation du contrat',          done: false, xp: 200 },
       { t: 'Les obligations contractuelles', done: false, xp: 220 },
       { t: 'La responsabilité civile',       done: false, xp: 250 },
       { t: 'Les biens',                      done: false, xp: 180 },
@@ -45,10 +45,10 @@ const MATIERES = {
     nom: 'Droit Constitutionnel',
     emoji: '🏛️',
     couleur: '#f59e0b',
-    prog: 31,
+    prog: 0,
     chapitres: [
-      { t: 'La Constitution de 1958',           done: true,  xp: 160 },
-      { t: 'Les institutions de la Ve République', done: true, xp: 200 },
+      { t: 'La Constitution de 1958',           done: false, xp: 160 },
+      { t: 'Les institutions de la Ve République', done: false, xp: 200 },
       { t: 'Le Parlement',                       done: false, xp: 180 },
       { t: 'Le Gouvernement',                    done: false, xp: 180 },
       { t: 'Le Conseil constitutionnel',         done: false, xp: 220 }
@@ -64,9 +64,9 @@ const MATIERES = {
     nom: 'Institutions juridictionnelles',
     emoji: '🔨',
     couleur: '#3b82f6',
-    prog: 5,
+    prog: 0,
     chapitres: [
-      { t: 'Organisation judiciaire française', done: true,  xp: 160 },
+      { t: 'Organisation judiciaire française', done: false, xp: 160 },
       { t: 'Les juridictions civiles',           done: false, xp: 180 },
       { t: 'Les juridictions pénales',           done: false, xp: 180 },
       { t: 'La justice administrative',          done: false, xp: 200 }
