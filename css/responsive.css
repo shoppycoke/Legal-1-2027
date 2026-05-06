@@ -1,0 +1,17 @@
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:none; }
+  .sidebar-overlay.open { display:block; }
+  .main { margin-left:0; }
+  .mobile-menu-btn { display:block; }
+  .page { padding:20px; }
+  .grid-4 { grid-template-columns:repeat(2,1fr); }
+  .grid-3 { grid-template-columns:repeat(2,1fr); }
+  .hero h1 { font-size:34px; }
+}
+
+@media (max-width:600px) {
+  .grid-2,.grid-3,.grid-4 { grid-template-columns:1fr; }
+  .topbar { padding:0 16px; }
+  .cours-content { padding:24px 20px; }
+}

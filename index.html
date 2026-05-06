@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LegalPrep L1 — Ton Coach Juridique Personnel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="brand">LegalPrep L1</div>
+      <div class="tagline">Ton coach juridique personnel</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Général</div>
+      <button class="nav-item active" onclick="navigate('accueil', this)"><span class="nav-icon">🏠</span> Accueil</button>
+      <button class="nav-item" onclick="navigate('dashboard', this)"><span class="nav-icon">📊</span> Dashboard</button>
+      <button class="nav-item" onclick="navigate('ai', this)"><span class="nav-icon">🤖</span> Assistant IA</button>
+      <div class="nav-section-label">Matières</div>
+      <button class="nav-item" onclick="navigate('matieres', this)"><span class="nav-icon">📚</span> Toutes les matières</button>
+      <button class="nav-item" onclick="openMatiere('intro')"><span class="nav-icon">⚖️</span> Intro au droit</button>
+      <button class="nav-item" onclick="openMatiere('civil')"><span class="nav-icon">📜</span> Droit civil</button>
+      <button class="nav-item" onclick="openMatiere('constit')"><span class="nav-icon">🏛️</span> Droit constitutionnel</button>
+      <button class="nav-item" onclick="openMatiere('institutions')"><span class="nav-icon">🔨</span> Institutions jur.</button>
+      <button class="nav-item" onclick="openMatiere('methodo_m')"><span class="nav-icon">✍️</span> Méthodologie jur.</button>
+      <div class="nav-section-label">Entraînement</div>
+      <button class="nav-item" onclick="navigate('quiz', this)"><span class="nav-icon">🧠</span> Quiz</button>
+      <button class="nav-item" onclick="navigate('methodo', this)"><span class="nav-icon">📐</span> Méthodologie</button>
+      <button class="nav-item" onclick="navigate('planning', this)"><span class="nav-icon">📅</span> Planning</button>
+      <button class="nav-item" onclick="navigate('conseils', this)"><span class="nav-icon">💡</span> Conseils</button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="xp-label"><span>Niveau 3 — Juriste en herbe</span><span>2 100 / 3 000 XP</span></div>
+      <div class="xp-bar"><div class="xp-fill" style="width:70%"></div></div>
+      <div class="level-badge">⚡ 2 100 XP</div>
+    </div>
+  </div>
+  <div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+
+  <!-- ═══ MAIN ═══ -->
+  <div class="main">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+        <div class="topbar-title" id="topbarTitle">Accueil</div>
+      </div>
+      <div class="topbar-right">
+        <div class="streak-badge">🔥 <span>7</span> jours</div>
+        <button class="btn-ai" onclick="navigate('ai', null)">💬 Ask AI</button>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE ACCUEIL ═══ -->
+    <div class="page active" id="page-accueil">
+      <div class="hero">
+        <div style="margin-bottom:16px"><span class="tag tag-gold">Septembre 2027 — prépare ton avance dès aujourd'hui</span></div>
+        <h1>Deviens le meilleur<br><span>dès le 1er jour.</span></h1>
+        <p>LegalPrep L1 est ton coach juridique personnel. Cours, quiz, méthodologie, IA — tout ce qu'il faut pour arriver en septembre 2027 avec une avance décisive.</p>
+        <div class="hero-btns">
+          <button class="btn btn-primary" onclick="navigate('dashboard', null)">🚀 Voir mon dashboard</button>
+          <button class="btn btn-outline" onclick="navigate('matieres', null)">📚 Commencer un cours</button>
+        </div>
+      </div>
+
+      <div class="countdown-card">
+        <div class="countdown-label">Compte à rebours jusqu'à septembre 2027</div>
+        <div class="countdown-nums">
+          <div class="count-unit"><span class="count-val" id="cdJours">--</span><div class="count-label">Jours</div></div>
+          <div class="count-sep">:</div>
+          <div class="count-unit"><span class="count-val" id="cdHeures">--</span><div class="count-label">Heures</div></div>
+          <div class="count-sep">:</div>
+          <div class="count-unit"><span class="count-val" id="cdMins">--</span><div class="count-label">Minutes</div></div>
+          <div class="count-sep">:</div>
+          <div class="count-unit"><span class="count-val" id="cdSecs">--</span><div class="count-label">Secondes</div></div>
+        </div>
+      </div>
+
+      <div style="padding:32px;max-width:1100px;margin:0 auto">
+        <div class="section-title">🎯 Tes matières L1</div>
+        <div class="grid-auto mb-24">
+          <div class="matiere-card" onclick="openMatiere('intro')">
+            <span class="matiere-icon">⚖️</span>
+            <div class="matiere-name">Introduction au Droit</div>
+            <div class="matiere-meta">5 chapitres · Fondamentaux</div>
+            <div class="matiere-prog-label"><span>Progression</span><span>42%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:42%;--fill-color:#c9a84c"></div></div>
+          </div>
+          <div class="matiere-card" onclick="openMatiere('civil')">
+            <span class="matiere-icon">📜</span>
+            <div class="matiere-name">Droit Civil</div>
+            <div class="matiere-meta">5 chapitres · Contrats & Obligations</div>
+            <div class="matiere-prog-label"><span>Progression</span><span>18%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:18%;--fill-color:#10b981"></div></div>
+          </div>
+          <div class="matiere-card" onclick="openMatiere('constit')">
+            <span class="matiere-icon">🏛️</span>
+            <div class="matiere-name">Droit Constitutionnel</div>
+            <div class="matiere-meta">5 chapitres · Ve République</div>
+            <div class="matiere-prog-label"><span>Progression</span><span>31%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:31%;--fill-color:#f59e0b"></div></div>
+          </div>
+          <div class="matiere-card" onclick="openMatiere('institutions')">
+            <span class="matiere-icon">🔨</span>
+            <div class="matiere-name">Institutions juridictionnelles</div>
+            <div class="matiere-meta">4 chapitres · Tribunaux & Justice</div>
+            <div class="matiere-prog-label"><span>Progression</span><span>5%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:5%;--fill-color:#3b82f6"></div></div>
+          </div>
+          <div class="matiere-card" onclick="openMatiere('methodo_m')">
+            <span class="matiere-icon">✍️</span>
+            <div class="matiere-name">Méthodologie juridique</div>
+            <div class="matiere-meta">4 chapitres · Dissertation & Arrêts</div>
+            <div class="matiere-prog-label"><span>Progression</span><span>0%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:0%;--fill-color:#8b5cf6"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE DASHBOARD ═══ -->
+    <div class="page" id="page-dashboard">
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <p>Ton avancement global — <span id="dateAujourd"></span></p>
+      </div>
+      <div class="grid-4 mb-24">
+        <div class="stat-card" style="--accent-color:#c9a84c">
+          <div class="stat-value">24%</div>
+          <div class="stat-label">Progression globale</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:24%"></div></div>
+        </div>
+        <div class="stat-card" style="--accent-color:#10b981">
+          <div class="stat-value">8</div>
+          <div class="stat-label">Cours terminés</div>
+          <div class="stat-sub">sur 23 au total</div>
+        </div>
+        <div class="stat-card" style="--accent-color:#3b82f6">
+          <div class="stat-value">71%</div>
+          <div class="stat-label">Score moyen quiz</div>
+          <div class="stat-sub">+4% cette semaine</div>
+        </div>
+        <div class="stat-card" style="--accent-color:#f43f5e">
+          <div class="stat-value">🔥 7</div>
+          <div class="stat-label">Streak</div>
+          <div class="stat-sub">Continue demain !</div>
+        </div>
+      </div>
+      <div class="grid-2 mb-24">
+        <div class="card">
+          <div class="section-title" style="font-size:16px">📋 Objectifs du jour</div>
+          <div class="cours-item" style="cursor:default"><span>✅</span><span class="cours-title" style="text-decoration:line-through;color:var(--text3)">Lire le cours "Sources du droit"</span></div>
+          <div class="cours-item" style="cursor:default"><span>⬜</span><span class="cours-title">Quiz Introduction au Droit (10 questions)</span></div>
+          <div class="cours-item" style="cursor:default"><span>⬜</span><span class="cours-title">Réviser les définitions clés</span></div>
+          <div class="cours-item" style="cursor:default"><span>⬜</span><span class="cours-title">Lire la méthode dissertation</span></div>
+        </div>
+        <div class="card">
+          <div class="section-title" style="font-size:16px">📈 Progression par matière</div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div><div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text2);margin-bottom:6px"><span>⚖️ Intro au Droit</span><span>42%</span></div><div class="progress-bar"><div class="progress-fill" style="width:42%;--fill-color:#c9a84c"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text2);margin-bottom:6px"><span>📜 Droit Civil</span><span>18%</span></div><div class="progress-bar"><div class="progress-fill" style="width:18%;--fill-color:#10b981"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text2);margin-bottom:6px"><span>🏛️ Droit Constit.</span><span>31%</span></div><div class="progress-bar"><div class="progress-fill" style="width:31%;--fill-color:#f59e0b"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text2);margin-bottom:6px"><span>🔨 Institutions</span><span>5%</span></div><div class="progress-bar"><div class="progress-fill" style="width:5%;--fill-color:#3b82f6"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text2);margin-bottom:6px"><span>✍️ Méthodologie</span><span>0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%;--fill-color:#8b5cf6"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="section-title" style="font-size:16px">⚡ Recommandations IA du jour</div>
+        <div class="grid-3">
+          <div class="card card-sm" style="border-color:rgba(201,168,76,.2)"><div style="font-size:20px;margin-bottom:8px">⚠️</div><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">Révise la hiérarchie des normes</div><div style="font-size:12px;color:var(--text2)">Tu as eu 60% sur ce sujet. Il faut consolider.</div></div>
+          <div class="card card-sm" style="border-color:rgba(59,130,246,.2)"><div style="font-size:20px;margin-bottom:8px">🎯</div><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">Commence Droit Civil Ch. 2</div><div style="font-size:12px;color:var(--text2)">Tu es en avance sur Intro au droit. Élargis maintenant vers le Civil.</div></div>
+          <div class="card card-sm" style="border-color:rgba(139,92,246,.2)"><div style="font-size:20px;margin-bottom:8px">📐</div><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">Entraîne-toi à la dissertation</div><div style="font-size:12px;color:var(--text2)">La méthode est cruciale en L1. 20 min de pratique aujourd'hui.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE MATIÈRES ═══ -->
+    <div class="page" id="page-matieres">
+      <div class="page-header">
+        <h1>Matières L1 Droit</h1>
+        <p>Sélectionne une matière pour accéder aux cours, fiches et quiz.</p>
+      </div>
+      <div class="grid-auto">
+        <div class="matiere-card" onclick="openMatiere('intro')"><span class="matiere-icon">⚖️</span><div class="matiere-name">Introduction au Droit</div><div class="matiere-meta">Fondamentaux · 5 chapitres</div><div class="matiere-prog-label"><span>Progression</span><span>42%</span></div><div class="progress-bar"><div class="progress-fill" style="width:42%;--fill-color:#c9a84c"></div></div><div style="margin-top:12px"><span class="tag tag-gold">En cours</span></div></div>
+        <div class="matiere-card" onclick="openMatiere('civil')"><span class="matiere-icon">📜</span><div class="matiere-name">Droit Civil</div><div class="matiere-meta">Contrats, Obligations · 5 chapitres</div><div class="matiere-prog-label"><span>Progression</span><span>18%</span></div><div class="progress-bar"><div class="progress-fill" style="width:18%;--fill-color:#10b981"></div></div><div style="margin-top:12px"><span class="tag tag-emerald">En cours</span></div></div>
+        <div class="matiere-card" onclick="openMatiere('constit')"><span class="matiere-icon">🏛️</span><div class="matiere-name">Droit Constitutionnel</div><div class="matiere-meta">Ve République · 5 chapitres</div><div class="matiere-prog-label"><span>Progression</span><span>31%</span></div><div class="progress-bar"><div class="progress-fill" style="width:31%;--fill-color:#f59e0b"></div></div><div style="margin-top:12px"><span class="tag tag-gold">En cours</span></div></div>
+        <div class="matiere-card" onclick="openMatiere('institutions')"><span class="matiere-icon">🔨</span><div class="matiere-name">Institutions juridictionnelles</div><div class="matiere-meta">Tribunaux, Justice · 4 chapitres</div><div class="matiere-prog-label"><span>Progression</span><span>5%</span></div><div class="progress-bar"><div class="progress-fill" style="width:5%;--fill-color:#3b82f6"></div></div><div style="margin-top:12px"><span class="tag tag-sapphire">Débuté</span></div></div>
+        <div class="matiere-card" onclick="openMatiere('methodo_m')"><span class="matiere-icon">✍️</span><div class="matiere-name">Méthodologie juridique</div><div class="matiere-meta">Dissertation, Cas pratique · 4 chapitres</div><div class="matiere-prog-label"><span>Progression</span><span>0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%;--fill-color:#8b5cf6"></div></div><div style="margin-top:12px"><span class="tag" style="background:rgba(139,92,246,.1);color:#8b5cf6">Non débuté</span></div></div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE MATIÈRE DÉTAIL ═══ -->
+    <div class="page" id="page-matiere">
+      <button class="btn-back" onclick="navigate('matieres', null)">← Retour aux matières</button>
+      <div id="matiereContent"></div>
+    </div>
+
+    <!-- ═══ PAGE COURS ═══ -->
+    <div class="page" id="page-cours">
+      <button class="btn-back" id="coursBackBtn">← Retour</button>
+      <div id="coursContent"></div>
+    </div>
+
+    <!-- ═══ PAGE QUIZ ═══ -->
+    <div class="page" id="page-quiz">
+      <div class="page-header">
+        <h1>Quiz interactifs</h1>
+        <p>Teste tes connaissances. Chaque bonne réponse = +XP.</p>
+      </div>
+
+      <div id="quizSelector">
+        <div class="grid-3 mb-24">
+          <div class="card" style="cursor:pointer;border-color:rgba(201,168,76,.2)" onclick="startQuiz('intro')"><div style="font-size:28px;margin-bottom:10px">⚖️</div><div style="font-weight:700;font-size:15px;margin-bottom:4px">Intro au Droit</div><div style="font-size:13px;color:var(--text2);margin-bottom:12px">8 questions · Niveau débutant</div><span class="tag tag-gold">Recommandé</span></div>
+          <div class="card" style="cursor:pointer;border-color:rgba(16,185,129,.2)" onclick="startQuiz('civil')"><div style="font-size:28px;margin-bottom:10px">📜</div><div style="font-weight:700;font-size:15px;margin-bottom:4px">Droit Civil</div><div style="font-size:13px;color:var(--text2);margin-bottom:12px">5 questions · Niveau débutant</div><span class="tag tag-emerald">Disponible</span></div>
+          <div class="card" style="cursor:pointer;border-color:rgba(245,158,11,.2)" onclick="startQuiz('constit')"><div style="font-size:28px;margin-bottom:10px">🏛️</div><div style="font-weight:700;font-size:15px;margin-bottom:4px">Droit Constitutionnel</div><div style="font-size:13px;color:var(--text2);margin-bottom:12px">5 questions · Niveau débutant</div><span class="tag" style="background:var(--amber-dim);color:var(--amber)">Disponible</span></div>
+        </div>
+      </div>
+
+      <div id="quizArea" style="display:none">
+        <div class="quiz-container">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+            <button class="btn btn-ghost" onclick="exitQuiz()">← Quitter</button>
+            <div class="progress-bar" style="flex:1;margin:0 20px;margin-top:0"><div class="progress-fill" id="quizProgress" style="--fill-color:#3b82f6;width:0%"></div></div>
+            <div id="quizScore" style="font-size:14px;color:var(--text2);min-width:60px;text-align:right"></div>
+          </div>
+          <div class="card" style="padding:32px">
+            <div class="quiz-question-num" id="qNum">Question 1 / 8</div>
+            <div class="quiz-question-text" id="qText"></div>
+            <div class="quiz-options" id="qOptions"></div>
+            <div id="qResult" style="display:none"></div>
+            <div style="margin-top:20px;display:none" id="qNextBtn">
+              <button class="btn btn-primary" onclick="nextQuestion()">Question suivante →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="quizResults" style="display:none">
+        <div class="quiz-container">
+          <div class="card" style="padding:40px;text-align:center">
+            <div style="font-size:56px;margin-bottom:16px" id="resultEmoji"></div>
+            <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;margin-bottom:8px" id="resultTitle"></div>
+            <div style="font-size:16px;color:var(--text2);margin-bottom:24px" id="resultText"></div>
+            <div class="grid-3" style="max-width:400px;margin:0 auto 28px">
+              <div class="stat-card" style="--accent-color:var(--emerald);text-align:center"><div class="stat-value" id="rCorrect">0</div><div class="stat-label">Bonnes rép.</div></div>
+              <div class="stat-card" style="--accent-color:var(--rose);text-align:center"><div class="stat-value" id="rWrong">0</div><div class="stat-label">Erreurs</div></div>
+              <div class="stat-card" style="--accent-color:var(--gold);text-align:center"><div class="stat-value" id="rScore">0%</div><div class="stat-label">Score</div></div>
+            </div>
+            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+              <button class="btn btn-primary" onclick="retryQuiz()">🔄 Réessayer</button>
+              <button class="btn btn-outline" onclick="exitQuiz()">Retour aux quiz</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE MÉTHODOLOGIE ═══ -->
+    <div class="page" id="page-methodo">
+      <div class="page-header">
+        <h1>Méthodologie juridique</h1>
+        <p>Maîtrise les exercices clés de la fac de droit.</p>
+      </div>
+      <div class="tabs" id="methodoTabs">
+        <button class="tab active" onclick="switchTab(this, 'dissertation')">Dissertation</button>
+        <button class="tab" onclick="switchTab(this, 'cas')">Cas pratique</button>
+        <button class="tab" onclick="switchTab(this, 'arret')">Commentaire d'arrêt</button>
+        <button class="tab" onclick="switchTab(this, 'fiche_arr')">Fiche d'arrêt</button>
+      </div>
+
+      <div id="methodo-dissertation">
+        <div class="methodo-card">
+          <div class="methodo-title">📝 La dissertation juridique</div>
+          <p style="font-size:14px;color:var(--text2);margin-bottom:20px;line-height:1.7">La dissertation est l'exercice roi en droit. Elle teste ta capacité à construire une réflexion juridique structurée, argumentée et nuancée sur une question de droit.</p>
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><h4>Analyser le sujet (20 min)</h4><p>Lis le sujet 3 fois. Identifie les mots clés. Définis chaque terme juridique. Délimite le sujet dans le temps et l'espace. Pose-toi la question : "Quel problème juridique ce sujet soulève-t-il ?"</p></div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><h4>Trouver la problématique (15 min)</h4><p>La problématique est une question précise qui reflète l'enjeu du sujet. Elle doit être formulée en une phrase claire, ni trop vague ni trop précise. Elle structure TOUT ton devoir.</p></div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><h4>Construire le plan en 2 parties (20 min)</h4><p>Plan en I. / II. avec 2 sous-parties chacune (A / B). Chaque partie répond à un aspect de la problématique. Évite les plans catalogue. Préfère les plans thématiques ou dialectiques.</p></div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><h4>Rédiger l'introduction (15 min)</h4><p>Accroche → Contexte → Définitions → Intérêt du sujet → Délimitation → Problématique → Annonce de plan. C'est la partie la plus importante. Ne la bâcle pas.</p></div></div>
+          <div class="step-item"><div class="step-num">5</div><div class="step-content"><h4>Développement + Conclusion</h4><p>Chaque sous-partie = idée directrice + arguments + exemples + textes de loi. Transitions entre les parties obligatoires. La conclusion doit répondre à la problématique et ouvrir une perspective.</p></div></div>
+        </div>
+        <div class="card" style="border-left:3px solid var(--rose)">
+          <div style="font-size:14px;font-weight:700;color:var(--rose);margin-bottom:10px">⚠️ Erreurs à éviter absolument</div>
+          <ul style="font-size:13px;color:var(--text2);line-height:2;padding-left:16px">
+            <li>Plan en 3 parties (banni en droit français)</li>
+            <li>Introduction trop courte (doit faire au moins 1/4 du devoir)</li>
+            <li>Oublier de définir les termes du sujet</li>
+            <li>Manque de transitions entre les parties</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="methodo-cas" style="display:none">
+        <div class="methodo-card">
+          <div class="methodo-title">⚖️ Le cas pratique</div>
+          <p style="font-size:14px;color:var(--text2);margin-bottom:20px;line-height:1.7">Le cas pratique est un exercice de résolution de problème juridique concret. On te présente une situation de fait et tu dois appliquer le droit pour résoudre le litige.</p>
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><h4>Lire les faits attentivement</h4><p>Note les éléments importants : qui ? quoi ? quand ? quelles circonstances ? Identifie les parties en présence et classe les faits pertinents.</p></div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><h4>Identifier le(s) problème(s) juridique(s)</h4><p>Traduis la situation concrète en question juridique : "Est-ce que X peut obtenir Y ?" Un cas pratique peut cacher plusieurs questions distinctes.</p></div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><h4>La méthode syllogisme</h4><p><strong style="color:var(--gold2)">Majeure</strong> (règle de droit applicable) → <strong style="color:var(--gold2)">Mineure</strong> (application aux faits) → <strong style="color:var(--gold2)">Conclusion</strong> (solution juridique). Pour chaque question, applique ce raisonnement.</p></div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><h4>Rédiger la solution</h4><p>Rédige en français juridique clair. Réponds à chaque question. Cite les articles du Code si tu les connais. Nuance ta réponse si besoin.</p></div></div>
+        </div>
+      </div>
+
+      <div id="methodo-arret" style="display:none">
+        <div class="methodo-card">
+          <div class="methodo-title">🔍 Le commentaire d'arrêt</div>
+          <p style="font-size:14px;color:var(--text2);margin-bottom:20px;line-height:1.7">Le commentaire d'arrêt consiste à analyser une décision de justice pour en comprendre la portée juridique. Exercice très redouté mais maîtrisable.</p>
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><h4>Lire et comprendre l'arrêt</h4><p>Identifie : la juridiction, la date, les parties, les faits, la procédure, la question posée à la Cour, la solution retenue, les motifs.</p></div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><h4>Rédiger la fiche d'arrêt préalable</h4><p>Faits → Procédure → Thèse des parties → Problème de droit → Solution. C'est la base de ton commentaire.</p></div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><h4>Trouver la portée de l'arrêt</h4><p>L'arrêt confirme-t-il ou infirme-t-il la jurisprudence antérieure ? Est-ce un revirement ? Quelles conséquences pratiques ?</p></div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><h4>Plan en 2 parties</h4><p>Souvent : I. La solution de l'arrêt / II. La portée de l'arrêt. Ne pas raconter l'arrêt : le commenter et le critiquer.</p></div></div>
+        </div>
+      </div>
+
+      <div id="methodo-fiche_arr" style="display:none">
+        <div class="methodo-card">
+          <div class="methodo-title">📋 La fiche d'arrêt</div>
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><h4>Les faits</h4><p>Résume les faits de manière concise et chronologique. Retire tout ce qui n'est pas juridiquement pertinent.</p></div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><h4>La procédure</h4><p>Comment l'affaire est arrivée devant cette juridiction ? Quelle décision a rendu le juge du fond ?</p></div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><h4>Le problème de droit</h4><p>LA question juridique à laquelle doit répondre la cour. Formule-la sous forme interrogative, de manière abstraite et générale.</p></div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><h4>La solution</h4><p>La réponse de la cour. Commence par "La Cour de cassation décide que..." ou "La Cour affirme que..."</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE PLANNING ═══ -->
+    <div class="page" id="page-planning">
+      <div class="page-header">
+        <h1>Planning jusqu'à septembre 2027</h1>
+        <p>Ton feuille de route — 871 jours pour devenir excellent.</p>
+      </div>
+      <div class="grid-2 mb-24">
+        <div class="card">
+          <div class="section-title" style="font-size:16px">🗓️ Cette semaine</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm)"><span style="font-size:11px;padding:2px 8px;background:var(--emerald-dim);color:var(--emerald);border-radius:99px;font-weight:700">LUN</span><span style="font-size:13px">Cours : Sources du droit + Quiz</span></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm)"><span style="font-size:11px;padding:2px 8px;background:var(--sapphire-dim);color:var(--sapphire);border-radius:99px;font-weight:700">MAR</span><span style="font-size:13px">Droit civil : Formation du contrat</span></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm)"><span style="font-size:11px;padding:2px 8px;background:var(--amber-dim);color:var(--amber);border-radius:99px;font-weight:700">MER</span><span style="font-size:13px">Droit constitutionnel : Ve République</span></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm)"><span style="font-size:11px;padding:2px 8px;background:var(--violet-dim);color:var(--violet);border-radius:99px;font-weight:700">JEU</span><span style="font-size:13px">Quiz + Révision définitions clés</span></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm)"><span style="font-size:11px;padding:2px 8px;background:var(--gold-dim);color:var(--gold2);border-radius:99px;font-weight:700">VEN</span><span style="font-size:13px">Méthodologie : Dissertation (1h)</span></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm)"><span style="font-size:11px;padding:2px 8px;background:var(--rose-dim);color:var(--rose);border-radius:99px;font-weight:700">SAM</span><span style="font-size:13px">Révision espacée + Fiches</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title" style="font-size:16px">📊 Objectifs mensuels</div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px"><span>Mai–Août 2025 — Fondamentaux</span><span style="color:var(--gold)">En cours</span></div><div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px"><span>Sept–Déc 2025 — Matières principales</span><span style="color:var(--text3)">À venir</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px"><span>Jan–Juin 2026 — Approfondissement</span><span style="color:var(--text3)">À venir</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px"><span>2027 — Sprint final</span><span style="color:var(--text3)">À venir</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="section-title" style="font-size:16px">🗺️ Feuille de route 2025–2027</div>
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date">Mai — Août 2025</div><div class="timeline-title">Phase 1 : Les fondamentaux</div><div class="timeline-desc">Maîtriser Introduction au droit (sources, hiérarchie des normes, personnes juridiques). Premiers chapitres Droit civil. Commencer la méthodologie dissertation.</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date">Sept. — Déc. 2025</div><div class="timeline-title">Phase 2 : Les matières principales</div><div class="timeline-desc">Droit civil complet (contrats, obligations, responsabilité). Droit constitutionnel complet. Quiz quotidiens. Entraînement intensif à la dissertation et au cas pratique.</div></div>
+          <div class="timeline-item"><div class="timeline-dot future"></div><div class="timeline-date">Jan. — Juin 2026</div><div class="timeline-title">Phase 3 : Approfondissement</div><div class="timeline-desc">Institutions juridictionnelles. Méthodologie avancée (commentaire d'arrêt, fiche d'arrêt). Simulations d'examens. Révision espacée sur toutes les matières.</div></div>
+          <div class="timeline-item"><div class="timeline-dot future"></div><div class="timeline-date">Juil. 2026 — Fév. 2027</div><div class="timeline-title">Phase 4 : Maîtrise totale</div><div class="timeline-desc">Révisions complètes. Sujets d'examen blanc. Connaissance de la jurisprudence clé. Tu es déjà au niveau L1 !</div></div>
+          <div class="timeline-item"><div class="timeline-dot future"></div><div class="timeline-date">Mars — Août 2027</div><div class="timeline-title">Phase 5 : Sprint final</div><div class="timeline-desc">Fiches de synthèse ultra-compactes. Tests quotidiens. Tu arrives en septembre 2027 avec 2 ans d'avance.</div></div>
+          <div class="timeline-item"><div class="timeline-dot future" style="background:var(--gold);box-shadow:0 0 0 4px var(--gold-dim)"></div><div class="timeline-date" style="color:var(--gold2);font-size:14px">🎓 SEPTEMBRE 2027</div><div class="timeline-title" style="color:var(--gold2)">Rentrée en L1 de Droit</div><div class="timeline-desc">Tu arrives avec 2 ans de préparation et la maîtrise des 5 matières. Objectif : top 10% de ta promotion dès le 1er semestre.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE ASSISTANT IA ═══ -->
+    <div class="page" id="page-ai">
+      <div class="page-header">
+        <h1>Assistant IA juridique</h1>
+        <p>Pose toutes tes questions en droit niveau L1. Je suis ton prof personnel.</p>
+      </div>
+      <div style="max-width:760px;margin:0 auto">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+          <button class="btn btn-ghost" style="font-size:12px;padding:7px 14px" onclick="askQuick('Qu\'est-ce que le droit objectif ?')">Droit objectif ?</button>
+          <button class="btn btn-ghost" style="font-size:12px;padding:7px 14px" onclick="askQuick('Explique-moi la hiérarchie des normes')">Hiérarchie des normes</button>
+          <button class="btn btn-ghost" style="font-size:12px;padding:7px 14px" onclick="askQuick('Quelle est la différence entre droit public et droit privé ?')">Public vs Privé</button>
+          <button class="btn btn-ghost" style="font-size:12px;padding:7px 14px" onclick="askQuick('Comment faire une dissertation juridique ?')">Méthode dissertation</button>
+          <button class="btn btn-ghost" style="font-size:12px;padding:7px 14px" onclick="askQuick('Qu\'est-ce qu\'un contrat ?')">Le contrat</button>
+        </div>
+        <div style="display:flex;flex-direction:column;height:calc(100vh - 340px);min-height:420px">
+          <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg ai">
+              <div class="chat-avatar ai">⚖️</div>
+              <div class="chat-bubble">
+                <strong>Bienvenue ! Je suis ton assistant IA juridique.</strong><br><br>
+                Je peux t'expliquer les concepts de ta L1, reformuler un cours, générer un quiz, ou simuler un examen oral.<br><br>
+                💡 <em>Pour activer l'IA complète (Claude), connecte l'API Anthropic dans <code>js/chat.js</code> — voir la fonction <code>callAnthropicAPI()</code>.</em><br><br>
+                Que veux-tu apprendre aujourd'hui ?
+              </div>
+            </div>
+          </div>
+          <div class="chat-input-row">
+            <textarea class="chat-input" id="chatInput" placeholder="Pose une question juridique... (Entrée pour envoyer)" rows="1" onkeydown="handleChatKey(event)"></textarea>
+            <button class="btn-send" onclick="sendChatMessage()">↑</button>
+          </div>
+        </div>
+        <div class="card" style="margin-top:20px;border-color:rgba(139,92,246,.2)">
+          <div style="font-size:13px;font-weight:700;color:var(--violet);margin-bottom:8px">🔌 Connecter l'IA Claude (Anthropic)</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.7">
+            Pour activer l'IA complète, ouvre <code style="background:var(--bg3);padding:1px 6px;border-radius:4px;color:var(--gold2)">js/chat.js</code>, trouve la fonction <code style="background:var(--bg3);padding:1px 6px;border-radius:4px;color:var(--gold2)">callAnthropicAPI()</code> et remplace <code style="background:var(--bg3);padding:1px 6px;border-radius:4px;color:var(--gold2)">TON_API_KEY</code> par ta clé API obtenue sur <a href="https://console.anthropic.com" target="_blank" style="color:var(--violet)">console.anthropic.com</a>.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE CONSEILS ═══ -->
+    <div class="page" id="page-conseils">
+      <div class="page-header">
+        <h1>Réussir sa L1 de Droit</h1>
+        <p>Les secrets des meilleurs étudiants en droit.</p>
+      </div>
+      <div class="grid-3 mb-24">
+        <div class="conseil-card" style="--c:#c9a84c"><div class="conseil-num">01</div><div class="conseil-title">Maîtrise le vocabulaire juridique</div><div class="conseil-desc">Le droit a son propre langage. Chaque mot a une signification précise. Constitue un glossaire personnel et apprends 5 définitions par jour.</div></div>
+        <div class="conseil-card" style="--c:#10b981"><div class="conseil-num">02</div><div class="conseil-title">Lis des arrêts dès maintenant</div><div class="conseil-desc">Ne commence pas les arrêts en L1 — commence maintenant. Lis 1 arrêt de la Cour de cassation par semaine. Tu prendras une longueur d'avance décisive.</div></div>
+        <div class="conseil-card" style="--c:#3b82f6"><div class="conseil-num">03</div><div class="conseil-title">La régularité bat l'intensité</div><div class="conseil-desc">30 minutes par jour tous les jours > 5 heures le dimanche. Le droit s'apprend par imprégnation progressive. Maintiens ton streak.</div></div>
+        <div class="conseil-card" style="--c:#f59e0b"><div class="conseil-num">04</div><div class="conseil-title">Entraîne-toi à écrire</div><div class="conseil-desc">Les examens en droit sont sur table, à la main, en 3h. Entraîne-toi à rédiger des introductions, des plans complets. La rédaction s'entraîne.</div></div>
+        <div class="conseil-card" style="--c:#8b5cf6"><div class="conseil-num">05</div><div class="conseil-title">Comprends avant d'apprendre par cœur</div><div class="conseil-desc">Comprends la logique d'une règle de droit, son fondement, ses exceptions. Ça s'ancre bien mieux que la mémorisation brute.</div></div>
+        <div class="conseil-card" style="--c:#f43f5e"><div class="conseil-num">06</div><div class="conseil-title">Utilise la répétition espacée</div><div class="conseil-desc">Revois une notion à J+1, J+7, J+30. C'est prouvé scientifiquement. Ne saute aucune session de révision dans ton planning.</div></div>
+      </div>
+      <hr class="divider">
+      <div class="section-title">🚫 Erreurs qui coûtent cher en L1</div>
+      <div class="grid-2">
+        <div class="card" style="border-left:3px solid var(--rose)">
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+            <li style="font-size:14px;color:var(--text2);display:flex;gap:10px"><span style="color:var(--rose)">✗</span>Arriver en L1 sans avoir jamais lu un article de loi</li>
+            <li style="font-size:14px;color:var(--text2);display:flex;gap:10px"><span style="color:var(--rose)">✗</span>Faire un plan en 3 parties en dissertation</li>
+            <li style="font-size:14px;color:var(--text2);display:flex;gap:10px"><span style="color:var(--rose)">✗</span>Négliger la méthodologie en pensant que "le fond suffit"</li>
+            <li style="font-size:14px;color:var(--text2);display:flex;gap:10px"><span style="color:var(--rose)">✗</span>Travailler en rafale pendant les partiels seulement</li>
+          </ul>
+        </div>
+        <div class="card" style="border-left:3px solid var(--emerald)">
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+            <li style="font-size:14px;color:var(--text2);display:flex;gap:10px"><span style="color:var(--emerald)">✓</span>Avoir lu les codes avant la rentrée</li>
+            <li style="font-size:14px;color:var(--text2);display:flex;gap:10px"><span style="color:var(--emerald)">✓</span>Savoir rédiger une fiche d'arrêt propre dès la 1ère semaine</li>
+            <li style="font-size:14px;color:var(--text2);display:flex;gap:10px"><span style="color:var(--emerald)">✓</span>Maîtriser la dissertation avant le 1er TD</li>
+            <li style="font-size:14px;color:var(--text2);display:flex;gap:10px"><span style="color:var(--emerald)">✓</span>Travailler 30–45 min par jour, 5 jours par semaine</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- fin .main -->
+</div><!-- fin .app -->
+
+<div class="toast" id="toast"></div>
+
+<!-- Scripts — chargés dans l'ordre des dépendances -->
+<script src="js/data.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
