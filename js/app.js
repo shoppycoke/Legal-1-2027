@@ -4,6 +4,11 @@
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
+// ═══════════════════════════════════════════════
+// INITIALISATION — RESTAURATION DE LA PROGRESSION
+// ═══════════════════════════════════════════════
+loadProgress();
+
 
 // ═══════════════════════════════════════════════
 // INITIALISATION — DATE DU JOUR (DASHBOARD)
